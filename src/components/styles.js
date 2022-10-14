@@ -4,8 +4,21 @@ import { fontSize, heightDp, widthDp } from "../globalConstants/dimensions";
 
 export const styles = StyleSheet.create({
     row: {
-        width: widthDp(98),
-        paddingVertical: heightDp(1)
+        width: widthDp(96),
+        paddingVertical: heightDp(1),
+        paddingHorizontal: widthDp(2),
+        marginVertical: heightDp(1),
+        shadowColor: colors.pinkish,
+        shadowOffset: {
+            height: heightDp(0.5),
+            width: widthDp(1)
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 5,
+        backgroundColor: colors.white,
+        borderRadius: widthDp(2),
+        borderWidth: StyleSheet.hairlineWidth / 2,
+        borderColor: colors.pinkish
     },
     plusIcon: {
         height: widthDp(10),
@@ -34,23 +47,58 @@ export const styles = StyleSheet.create({
         backgroundColor: 'rgba(72, 64, 74,0.4)'
     },
     modal: {
-        height: heightDp(50),
+        height: heightDp(30),
         width: widthDp(70),
-        // alignItems: 'center',
         backgroundColor: colors.white,
         paddingVertical: heightDp(2),
         paddingHorizontal: widthDp(2)
     },
-    modalTitle:{
-        fontSize:fontSize(20),
+    modalTitle: {
+        fontSize: fontSize(20),
         alignSelf: 'center',
-        textAlign: 'center'
+        textAlign: 'center',
+        marginVertical: heightDp(2)
+    },
+    nameContainer: {
+        width: widthDp(66),
+        flexDirection: 'row',
+        marginVertical: heightDp(1),
+    },
+    bellIcon: {
+        alignSelf: 'center',
+        marginHorizontal: widthDp(1.5)
     },
     nameInput: {
-        height: heightDp(5),
-        widthDp: widthDp(60),
-        marginVertical: heightDp(2),
+        width: widthDp(56),
         borderBottomWidth: StyleSheet.hairlineWidth,
-        borderBottomColor: colors.pinkish
+        borderBottomColor: colors.pinkish,
+        paddingHorizontal: widthDp(1)
+    },
+    inputText: {
+        textAlign: 'left',
+        fontSize: fontSize(15)
+    },
+    datePicker: {
+        width: widthDp(33),
+    },
+    timerIcon: {
+        position: 'absolute',
+        left: widthDp(1)
+    },
+    dateIcon: {
+        position: 'absolute',
+        left: 0
+    },
+    dateInput: {
+        borderWidth: 0,
+        marginLeft: widthDp(10),
+        borderBottomWidth: StyleSheet.hairlineWidth,
+    },
+    pickerRow:{
+        flexDirection: 'row',
+        marginVertical: heightDp(1)
+    },
+    buttonStyles:{
+        marginTop: heightDp(3)
     }
 })

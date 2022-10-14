@@ -1,13 +1,23 @@
 import React from 'react';
-import { View, Text } from 'react-native'
+import { View, Text, Pressable } from 'react-native'
 import { Event } from '../globalConstants/interfaces';
+import { styles } from './styles';
 
-const EventRenderItem: React.FC<Event> = (props) => {
+interface Props {
+    name: string,
+    date: Date,
+    time: string,
+    onClick: () => void,
+    onHold: () => void
+}
+
+const EventRenderItem: React.FC<Props> = (props) => {
     return (
-        <View>
+        <Pressable style={styles.row} onPress={props.onClick} onLongPress={props.onHold}>
             <Text>{props.name}</Text>
             <Text>{props.date.toString()}</Text>
-        </View>
+            <Text>{props.time}</Text>
+        </Pressable>
     )
 }
 
