@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, View, Text, TextInput, Button } from 'react-native';
-import DatePicker from 'react-native-datepicker';
+import { Modal, View, Text, TextInput, Button, TouchableOpacity } from 'react-native';
+import DatePicker from 'react-native-date-picker'
 import BellIcon from './BellIcon';
 
 import { styles } from './styles';
 import TimerIcon from './TimerIcon';
 import { Event } from '../types/interfaces'
 import CalendarIcon from './CalendarIcon';
+import getTime from '../utils.js/getTime';
 
 interface Props {
-    save: (name: string, date: string, time: string) => void,
+    save: (name: string, date: Date) => void,
     cancel: () => void,
     event: Event | null,
     visible: boolean
@@ -17,31 +18,38 @@ interface Props {
 
 const AddEventModal = (props: Props): JSX.Element => {
     const [name, setName] = useState<string>('');
-    const [date, setDate] = useState<string>('');
-    const [time, setTime] = useState<string>('');
+    const [date, setDate] = useState<Date>(new Date());
+    const [calendar, setCalendar] = useState<boolean>(false)
 
     useEffect(() => {
         if (props.event !== null) {
             setName(props.event.name);
             setDate(props.event.date);
-            setTime(props.event.time);
         }
         else {
             setName('');
-            setDate('');
-            setTime('');
+            setDate(new Date());
         }
     }, [props.visible]);
 
     const submit = () => {
-        // const [day,month, year] = date.split('-');
-        props.save(name, date, time);
+        props.save(name, date);
         setName('');
     }
 
     const cancel = () => {
         // const [day,month, year] = date.split('-');
         props.cancel();
+        setName('');
+    }
+
+    const showCalendar = () => {
+        setCalendar(!calendar)
+    }
+
+    const setDateTime = (dateTime: Date) => {
+        setDate(dateTime);
+        showCalendar();
     }
 
     return (
@@ -52,11 +60,10 @@ const AddEventModal = (props: Props): JSX.Element => {
         >
             <View style={styles.modalContainer}>
                 <View style={styles.modal}>
-                    <Text style={styles.modalTitle}>Set Timer</Text>
-                    <View style={styles.nameContainer}>
-                        <View style={styles.bellIcon}>
-                            <BellIcon />
-                        </View>
+                    <Text style={styles.modalTitle}>Set ToDo</Text>
+
+                    <View style={styles.row}>
+                        <BellIcon />
                         <View style={styles.nameInput}>
                             <TextInput
                                 value={name}
@@ -65,50 +72,23 @@ const AddEventModal = (props: Props): JSX.Element => {
                             />
                         </View>
                     </View>
-                    <View style={styles.pickerRow}>
-                        <DatePicker
-                            style={styles.datePicker}
-                            date={date}
-                            mode="date"
-                            placeholder="select date"
-                            format="DD-MM-YYYY"
-                            minDate="01-06-2016"
-                            maxDate="01-06-3016"
-                            confirmBtnText="Confirm"
-                            cancelBtnText="Cancel"
-                            customStyles={{
-                                dateIcon: {
-                                    ...styles.dateIcon
-                                },
-                                dateInput: {
-                                    ...styles.dateInput
-                                }
-                            }}
-                            onDateChange={(date: any) => setDate(date)}
-                            // getDateStr={(date: any)=>{console.log('date is',date); let curr =  new Date(date); return curr.toString()}}
-                            iconComponent={<View style={styles.timerIcon}>
-                                <CalendarIcon />
-                            </View>}
-                        />
-                        <DatePicker
-                            style={styles.datePicker}
-                            date={time}
-                            mode="time"
-                            placeholder="select time"
-                            format="LT"
-                            confirmBtnText="Confirm"
-                            cancelBtnText="Cancel"
-                            customStyles={{
-                                dateInput: {
-                                    ...styles.dateInput
-                                },
-                            }}
-                            onDateChange={(time: any) => setTime(time)}
-                            iconComponent={<View style={styles.timerIcon}>
-                                <TimerIcon />
-                            </View>}
-                        />
-                    </View>
+
+                    <TouchableOpacity onPress={() => showCalendar()} style={styles.row}>
+                        <CalendarIcon />
+                        <Text style={styles.dateInput}>{date.toDateString()}</Text>
+                        <TimerIcon />
+                        <Text style={styles.dateInput}>{getTime(date)}</Text>
+                    </TouchableOpacity>
+
+                    <DatePicker
+                        modal
+                        open={calendar}
+                        date={date}
+                        onConfirm={(dateTime: Date) => setDateTime(dateTime)}
+                        onCancel={() => {
+                            showCalendar()
+                        }}
+                    />
                     <View style={styles.buttonStyles}>
                         <Button title='cancel' onPress={cancel} />
                         <Button title='save' onPress={submit} disabled={name.trim() == '' ? true : false} />

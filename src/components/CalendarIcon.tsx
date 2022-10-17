@@ -6,7 +6,7 @@ import { styles } from './styles';
 
 const CalendarIcon: React.FC = () => {
     return (
-        <Calendar width={widthDp(7)} height={widthDp(7)} />
+        <Calendar width={widthDp(5)} height={widthDp(5)} />
     )
 }
 

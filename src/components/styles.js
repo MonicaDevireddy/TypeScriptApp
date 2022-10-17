@@ -5,12 +5,9 @@ import { fontSize, heightDp, widthDp } from "../globalConstants/dimensions";
 export const styles = StyleSheet.create({
     card: {
         width: widthDp(96),
-        height: heightDp(12),
-        backgroundColor: 'green',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingVertical: heightDp(1),
         paddingHorizontal: widthDp(2),
         marginVertical: heightDp(1),
         shadowColor: colors.pinkish,
@@ -21,9 +18,14 @@ export const styles = StyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 5,
         backgroundColor: colors.white,
-        borderRadius: widthDp(2),
-        borderWidth: StyleSheet.hairlineWidth / 2,
-        borderColor: colors.pinkish
+        borderRadius: widthDp(1),
+        borderWidth: StyleSheet.hairlineWidth,
+        borderColor: colors.pinkish,
+        paddingVertical: heightDp(1),
+        elevation: 5
+    },
+    none:{
+        backgroundColor: 'white'
     },
     nameText:{
         fontSize: fontSize(25),
@@ -33,15 +35,18 @@ export const styles = StyleSheet.create({
     dateTimeContainer:{
         width: widthDp('80'),
         flexDirection: 'row',
-        marginTop: heightDp(1)
+        marginTop: heightDp(1),
+        alignItems: 'center'
     },
     dateText:{
         fontSize: fontSize(20),
         marginHorizontal: widthDp(2),
     },
     deleteIcon:{
-        marginRight: widthDp(3)
+        marginRight: widthDp(3),
     },
+
+    //PlusIcon
     plusIcon: {
         height: widthDp(10),
         width: widthDp(10),
@@ -69,11 +74,12 @@ export const styles = StyleSheet.create({
         backgroundColor: 'rgba(72, 64, 74,0.4)'
     },
     modal: {
-        height: heightDp(30),
+        // height: heightDp(30),
         width: widthDp(70),
         backgroundColor: colors.white,
         paddingVertical: heightDp(2),
-        paddingHorizontal: widthDp(2)
+        paddingHorizontal: widthDp(2),
+        alignItems: 'center'
     },
     modalTitle: {
         fontSize: fontSize(20),
@@ -81,17 +87,14 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         marginVertical: heightDp(2)
     },
-    nameContainer: {
+    row: {
         width: widthDp(66),
         flexDirection: 'row',
         marginVertical: heightDp(1),
-    },
-    bellIcon: {
-        alignSelf: 'center',
-        marginHorizontal: widthDp(1.5)
+        alignItems: 'center',
     },
     nameInput: {
-        width: widthDp(56),
+        width: widthDp(59),
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderBottomColor: colors.pinkish,
         paddingHorizontal: widthDp(1)
@@ -103,23 +106,10 @@ export const styles = StyleSheet.create({
     datePicker: {
         width: widthDp(33),
     },
-    timerIcon: {
-        position: 'absolute',
-        left: widthDp(1)
-    },
-    dateIcon: {
-        position: 'absolute',
-        left: 0
-    },
-    dateInput: {
-        borderWidth: 0,
-        marginLeft: widthDp(10),
-        borderBottomWidth: StyleSheet.hairlineWidth,
-    },
-    pickerRow:{
-        flexDirection: 'row',
-        marginVertical: heightDp(1)
-    },
+    dateInput:{
+        fontSize: fontSize(15),
+        marginHorizontal: widthDp(1.5)
+    },   
     buttonStyles:{
         width: widthDp(66),
         justifyContent: 'space-evenly',

@@ -5,7 +5,7 @@ import { widthDp } from '../globalConstants/dimensions';
 
 const TimerIcon: React.FC = () => {
     return (
-        <Timer width={widthDp(7)} height={widthDp(7)} />
+        <Timer width={widthDp(5)} height={widthDp(5)} />
     )
 }
 

@@ -6,7 +6,7 @@ import { styles } from './styles';
 
 const BellIcon: React.FC = () => {
     return (
-            <Bell width={widthDp(7)} height={widthDp(7)} />
+            <Bell width={widthDp(5)} height={widthDp(5)} />
     )
 }
 
