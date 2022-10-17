@@ -5,6 +5,7 @@ import { Event, EventsScreenNavigationProps, EventsScreenProps } from '../types/
 import PlusIcon from '../components/PlusIcon';
 import AddEventModal from '../components/AddEventModal';
 import { useNavigation } from '@react-navigation/native';
+import { MaterialIcon } from '../components/Icon';
 
 
 // const EventsScreen = ({ navigation }: EventsScreenProps): JSX.Element => {
@@ -58,6 +59,8 @@ const EventsScreen = (): JSX.Element => {
 
     return (
         <SafeAreaView style={{ backgroundColor: 'white', flex: 1, alignItems: 'center' }}>
+                        <MaterialIcon size="large" color="purple" name="home" />
+
             <AddEventModal save={(name, date, time) => { updateEventsList(name, date, time) }} cancel={() => setModal(!modal)} visible={modal} event={currentEvent} />
             <FlatList
                 data={eventsList}
