@@ -1,26 +1,47 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, View, Text, TextInput, Button } from 'react-native';
 import DatePicker from 'react-native-datepicker';
-import { widthDp } from '../globalConstants/dimensions';
 import BellIcon from './BellIcon';
 
 import { styles } from './styles';
 import TimerIcon from './TimerIcon';
+import { Event } from '../types/interfaces'
+import CalendarIcon from './CalendarIcon';
 
 interface Props {
-    onClick: (name: string, date: Date, time: string) => void,
+    save: (name: string, date: string, time: string) => void,
+    cancel: () => void,
+    event: Event | null,
     visible: boolean
 }
 
-const AddEventModal: React.FC<Props> = (props) => {
+const AddEventModal = (props: Props): JSX.Element => {
     const [name, setName] = useState<string>('');
     const [date, setDate] = useState<string>('');
     const [time, setTime] = useState<string>('');
 
+    useEffect(() => {
+        if (props.event !== null) {
+            setName(props.event.name);
+            setDate(props.event.date);
+            setTime(props.event.time);
+        }
+        else {
+            setName('');
+            setDate('');
+            setTime('');
+        }
+    }, [props.visible]);
+
     const submit = () => {
-        const [day,month, year] = date.split('-');
-        props.onClick(name, new Date(+year, +month - 1, +day), time);
-        setName('')
+        // const [day,month, year] = date.split('-');
+        props.save(name, date, time);
+        setName('');
+    }
+
+    const cancel = () => {
+        // const [day,month, year] = date.split('-');
+        props.cancel();
     }
 
     return (
@@ -64,16 +85,19 @@ const AddEventModal: React.FC<Props> = (props) => {
                                 }
                             }}
                             onDateChange={(date: any) => setDate(date)}
+                            // getDateStr={(date: any)=>{console.log('date is',date); let curr =  new Date(date); return curr.toString()}}
+                            iconComponent={<View style={styles.timerIcon}>
+                                <CalendarIcon />
+                            </View>}
                         />
                         <DatePicker
                             style={styles.datePicker}
                             date={time}
                             mode="time"
                             placeholder="select time"
-                            format="LTS"
+                            format="LT"
                             confirmBtnText="Confirm"
                             cancelBtnText="Cancel"
-                            // is24Hour={true}
                             customStyles={{
                                 dateInput: {
                                     ...styles.dateInput
@@ -86,7 +110,8 @@ const AddEventModal: React.FC<Props> = (props) => {
                         />
                     </View>
                     <View style={styles.buttonStyles}>
-                        <Button title='save' onPress={submit} />
+                        <Button title='cancel' onPress={cancel} />
+                        <Button title='save' onPress={submit} disabled={name.trim() == '' ? true : false} />
                     </View>
                 </View>
             </View>

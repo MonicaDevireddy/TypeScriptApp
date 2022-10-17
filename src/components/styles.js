@@ -3,8 +3,13 @@ import colors from "../globalConstants/colors";
 import { fontSize, heightDp, widthDp } from "../globalConstants/dimensions";
 
 export const styles = StyleSheet.create({
-    row: {
+    card: {
         width: widthDp(96),
+        height: heightDp(12),
+        backgroundColor: 'green',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         paddingVertical: heightDp(1),
         paddingHorizontal: widthDp(2),
         marginVertical: heightDp(1),
@@ -19,6 +24,23 @@ export const styles = StyleSheet.create({
         borderRadius: widthDp(2),
         borderWidth: StyleSheet.hairlineWidth / 2,
         borderColor: colors.pinkish
+    },
+    nameText:{
+        fontSize: fontSize(25),
+        fontWeight: 'bold',
+        color: colors.pink,
+    },
+    dateTimeContainer:{
+        width: widthDp('80'),
+        flexDirection: 'row',
+        marginTop: heightDp(1)
+    },
+    dateText:{
+        fontSize: fontSize(20),
+        marginHorizontal: widthDp(2),
+    },
+    deleteIcon:{
+        marginRight: widthDp(3)
     },
     plusIcon: {
         height: widthDp(10),
@@ -99,6 +121,9 @@ export const styles = StyleSheet.create({
         marginVertical: heightDp(1)
     },
     buttonStyles:{
+        width: widthDp(66),
+        justifyContent: 'space-evenly',
+        flexDirection: 'row',
         marginTop: heightDp(3)
-    }
+    },
 })
