@@ -4,19 +4,19 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { RouteProp } from '@react-navigation/native';
 
 
-export interface Event {
+export interface Todo {
     name: string,
     date: Date,
-    status: boolean
+    description: string
 }
 
 export type RootStackParamList = {
-    EventsScreen: undefined;
-    TimerScreen: { date: Date; };
+    TodosListScreen: undefined;
+    TimerScreen: { todo: Todo };
 };
 
-export type EventsScreenProps = NativeStackScreenProps<RootStackParamList, 'EventsScreen'>;
-export type EventsScreenNavigationProps = NativeStackNavigationProp<RootStackParamList, 'TimerScreen'>;
+export type TodosListScreenProps = NativeStackScreenProps<RootStackParamList, 'TodosListScreen'>;
+export type TodosListScreenNavigationProps = NativeStackNavigationProp<RootStackParamList, 'TimerScreen'>;
 
 export type TimerScreenProps = NativeStackScreenProps<RootStackParamList, 'TimerScreen'>;
 export type TimerScreenNavigationProps = NativeStackNavigationProp<RootStackParamList>;

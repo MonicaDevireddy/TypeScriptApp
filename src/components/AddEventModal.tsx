@@ -10,7 +10,7 @@ import CalendarIcon from './CalendarIcon';
 import getTime from '../utils.js/getTime';
 
 interface Props {
-    save: (name: string, date: Date) => void,
+    save: ({}: Event) => void,
     cancel: () => void,
     event: Event | null,
     visible: boolean
@@ -33,7 +33,12 @@ const AddEventModal = (props: Props): JSX.Element => {
     }, [props.visible]);
 
     const submit = () => {
-        props.save(name, date);
+        let event = {
+            name: name,
+            date: date,
+            status: true
+        }
+        props.save(event);
         setName('');
     }
 
